@@ -9,10 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@dnd-kit/abstract": "^0.2.4",
-    "@dnd-kit/dom": "^0.2.4",
-    "@dnd-kit/helpers": "^0.2.4",
-    "@dnd-kit/react": "^0.2.4",
     "jspdf": "^4.1.0",
     "jspdf-autotable": "^5.0.7",
     "nanoid": "^5.1.6",

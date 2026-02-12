@@ -4,9 +4,12 @@ import { useSeatingStore } from "@/store/useSeatingStore";
 import { SIDEBAR_WIDTH } from "@/lib/constants";
 import { TableList } from "./TableList";
 import { PdfExport } from "@/components/pdf/PdfExport";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { exportCanvasImage } from "@/components/canvas/exportCanvasImage";
 
 export function Sidebar() {
   const addTable = useSeatingStore((s) => s.addTable);
+  const tables = useSeatingStore((s) => s.tables);
   const eventName = useSeatingStore((s) => s.eventName);
   const setEventName = useSeatingStore((s) => s.setEventName);
 
@@ -21,9 +24,12 @@ export function Sidebar() {
     >
       {/* Header */}
       <div className="px-4 pt-5 pb-3">
-        <h1 className="text-base font-semibold tracking-tight">
-          Seating Planner
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-base font-semibold tracking-tight">
+            Seating Planner
+          </h1>
+          <ThemeToggle />
+        </div>
         <input
           type="text"
           placeholder="Event name..."
@@ -65,12 +71,22 @@ export function Sidebar() {
         <TableList />
       </div>
 
-      {/* Footer with PDF export */}
+      {/* Footer with exports */}
       <div
         className="border-t p-4"
         style={{ borderColor: "var(--sidebar-border)" }}
       >
-        <PdfExport />
+        <div className="flex gap-2">
+          <PdfExport />
+          <button
+            onClick={exportCanvasImage}
+            disabled={tables.length === 0}
+            className="flex-1 rounded-md px-3 py-2 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+            style={{ background: "#1c1917" }}
+          >
+            Export PNG
+          </button>
+        </div>
       </div>
     </aside>
   );
